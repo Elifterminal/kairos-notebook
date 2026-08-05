@@ -312,6 +312,20 @@ def panel_built() -> str:
     out.append(f'<div class="card"><h3>{pb["title"]}</h3>'
                f'<p>{pb["body"]}</p><p>{pb["tail"]}</p></div>')
 
+    rg = C.RADAR_GATE
+    out.append("<h2>It turned out to be two systems</h2>")
+    out.append(f'<p>{rg["lede"]}</p>')
+    out.append(fig(F.radar_and_gate(),
+                   "The split matters because a thin week could mean Radar found nothing or Gate "
+                   "rejected everything — and those call for opposite responses."))
+    for key in ("radar", "gate"):
+        part = rg[key]
+        out.append(f'<div class="card"><h3>{part["title"]}</h3><p>{part["body"]}</p>'
+                   f'<p>{part["judged"]}</p></div>')
+    for title, body in rg["why"]:
+        out.append(read(title, body))
+    out.append(f'<div class="read ok"><p>{rg["status"]}</p></div>')
+
     a = C.ADJACENCY
     out.append(f'<h2>{a["title"]}</h2>')
     out.append(f'<p>{a["lede"]}</p>')
@@ -384,10 +398,12 @@ def build() -> str:
 <nav class="tabs">{tabs}</nav>
 {panels}
 <footer>
-  <p>{C.PROJECT} is built and running, and has validated nothing. It collects real data and emits
-  cards weekly; no card has been acted on, no prediction scored, and no backtest run. The design
-  argument in the first five tabs is preserved exactly as it was written before any code existed —
-  corrections attach, they never replace, and the errors stay up in their original wording.</p>
+  <p>{C.PROJECT} is built and running. Its operator-fit layer is already useful; its
+  weak-signal layer has validated nothing and will stay unvalidated until a prediction log has
+  accumulated and a replay has run. Those are two different claims and the page tries hard not to
+  let the first one flatter the second. The design argument in the first five tabs is preserved
+  exactly as written before any code existed — corrections attach, they never replace, and the
+  errors stay up in their original wording.</p>
   <p>Generated from <code>src/content.py</code>. No external requests, no trackers, no fonts.</p>
 </footer>
 </div>

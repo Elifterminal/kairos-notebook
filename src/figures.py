@@ -236,3 +236,49 @@ def source_matrix() -> str:
         "</svg>",
     ]
     return "".join(parts)
+
+
+def radar_and_gate() -> str:
+    """Two layers, two claims, two very different states of proof."""
+    w, h = 900, 330
+    parts = [
+        f'<svg viewBox="0 0 {w} {h}" role="img" aria-label="Radar finds unusual change in the '
+        'world; Gate decides whether it is actionable for one operator.">'
+    ]
+
+    def panel(x: int, title: str, subtitle: str, rows: list[str], verdict: str,
+              colour: str, proven: bool) -> None:
+        parts.append(
+            f'<rect x="{x}" y="34" width="380" height="228" rx="12" fill="none" '
+            f'stroke="{colour}" stroke-opacity=".55" stroke-width="1.6"/>'
+        )
+        parts.append(f'<text x="{x + 20}" y="64" font-size="15" font-weight="700" '
+                     f'fill="{colour}">{_esc(title)}</text>')
+        parts.append(f'<text x="{x + 20}" y="85" font-size="12" fill="var(--mut)">'
+                     f'{_esc(subtitle)}</text>')
+        for i, row in enumerate(rows):
+            parts.append(f'<circle cx="{x + 26}" cy="{110 + i * 22}" r="2.6" fill="{colour}"/>')
+            parts.append(f'<text x="{x + 38}" y="{114 + i * 22}" font-size="12.5" '
+                         f'fill="var(--fg)">{_esc(row)}</text>')
+        parts.append(f'<line x1="{x + 20}" y1="{212}" x2="{x + 360}" y2="{212}" '
+                     'stroke="var(--line)"/>')
+        mark = "\u2713" if proven else "\u2014"
+        parts.append(f'<text x="{x + 20}" y="{236}" font-size="12.5" font-weight="700" '
+                     f'fill="{"var(--ok)" if proven else "var(--warn)"}">{mark} {_esc(verdict)}</text>')
+
+    panel(20, "RADAR", "outward-facing \u2014 knows nothing about you",
+          ["filings naming a capability", "research effort concentrating",
+           "business formation accelerating", "supply thinning as asks rise"],
+          "unproven \u2014 needs time and a replay", "var(--accent)", proven=False)
+    panel(500, "GATE", "inward-facing \u2014 knows nothing about interest",
+          ["capital, licences, distance", "tax and local prices",
+           "closing dates", "the cost of starting at all"],
+          "already working", "var(--ok)", proven=True)
+
+    parts.append(f'<text x="{w / 2}" y="20" text-anchor="middle" font-size="12.5" '
+                 'fill="var(--mut)">two layers, two claims, two different states of proof</text>')
+    parts.append(f'<text x="{w / 2}" y="{300}" text-anchor="middle" font-size="12.5" '
+                 'fill="var(--mut)">Radar can be brilliant while Gate correctly says no. Gate can '
+                 'pay for itself on entirely ordinary data.</text>')
+    parts.append("</svg>")
+    return "".join(parts)

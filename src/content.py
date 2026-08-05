@@ -585,6 +585,66 @@ CONTAMINATION = {
     ),
 }
 
+# The clearest idea to come out of the review, and it isn't code — it's a way of seeing what got
+# built. Published because it changes what "does this work?" even means.
+RADAR_GATE = {
+    "lede": (
+        "Somewhere in the building, this stopped being one system and became two. Naming them "
+        "separately matters, because they make different claims, they are judged by different "
+        "evidence, and they are at completely different stages of maturity. Evaluated together "
+        "they flatter each other; evaluated apart, one is already useful and the other is still "
+        "a hypothesis."
+    ),
+    "radar": {
+        "title": "Radar — finds unusual change in the world",
+        "body": (
+            "Filings naming a capability more than they did. Research effort concentrating. "
+            "Business formation accelerating in a sector. Supply thinning while asks rise. Radar "
+            "is outward-facing and knows nothing about any particular person."
+        ),
+        "judged": (
+            "Judged on <em>earliness and truth</em>: did it fire before the thing was obvious, and "
+            "was the thing real? Both questions need time and a prediction log to answer, which is "
+            "why Radar cannot yet claim anything. It is producing credible signals. Credible is "
+            "not the same as early, and neither is the same as correct."
+        ),
+    },
+    "gate": {
+        "title": "Gate — decides whether anything found is actionable for one operator",
+        "body": (
+            "Capital, licences, distance, tax, cost of living, closing dates, and the cost of "
+            "starting at all. Gate is inward-facing and knows nothing about whether something is "
+            "interesting — only whether this particular person could act on it."
+        ),
+        "judged": (
+            "Judged on <em>whether it saves the operator time and stops bad decisions</em>. That "
+            "is answerable immediately, and the answer is already yes: it compresses pay, tax, "
+            "local prices, travel burden, closing date and credential risk into a card that can be "
+            "dismissed in thirty seconds. It does that on completely ordinary public job "
+            "postings, with no weak signal involved at all."
+        ),
+    },
+    "why": [
+        ("Radar can be brilliant while Gate correctly says no",
+         "A genuine capability threshold that requires half a million in capital and a licence is "
+         "a true finding and an irrelevant one. That is not a failure of either layer. It is the "
+         "system working, and the old single-verdict framing had no way to say so."),
+        ("Gate can produce value from entirely ordinary information",
+         "The employment cards involve no early detection whatsoever. Federal job postings are "
+         "public, indexed and boring. The value is in the arithmetic and the fit filter, not in "
+         "any signal being weak or early — and that value arrives now, not in six months."),
+        ("Grading them together hides which one is failing",
+         "A thin week could mean Radar found nothing or Gate rejected everything, and those call "
+         "for opposite responses: widen the sources, or loosen the constraints. The gate audit "
+         "already separates these numerically; this framing separates them conceptually."),
+    ],
+    "status": (
+        "Current honest state: <strong>Gate is working.</strong> <strong>Radar is unproven and "
+        "will stay unproven until a prediction log has accumulated and a replay has run.</strong> "
+        "Neither statement was sayable while the two were treated as one thing."
+    ),
+}
+
 BUILT_STILL_UNPROVEN = [
     ("No backtest has run",
      "The ledger was built so that replay is possible and safe — every read requires a cutoff, and "
