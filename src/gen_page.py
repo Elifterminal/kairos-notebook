@@ -301,6 +301,17 @@ def panel_built() -> str:
                f'<p>{C.BUILT_DISCIPLINE["body"]}</p>'
                f'<p>{C.BUILT_DISCIPLINE["tail"]}</p></div>')
 
+    out.append("<h2>The design's author reviewed this page</h2>")
+    out.append(f"<p>{C.REVIEW['lede']}</p>")
+    r = C.REVIEW["refuted"]
+    out.append(f'<div class="card"><h3>{r["title"]} <span class="tag warn">refuted</span></h3>'
+               f'<p>{r["body"]}</p><p>{r["tail"]}</p></div>')
+    for title, body in C.REVIEW["adopted"]:
+        out.append(read(title, body, "ok"))
+    pb = C.REVIEW["pushback"]
+    out.append(f'<div class="card"><h3>{pb["title"]}</h3>'
+               f'<p>{pb["body"]}</p><p>{pb["tail"]}</p></div>')
+
     out.append("<h2>What still cannot be claimed</h2>")
     for title, body in C.BUILT_STILL_UNPROVEN:
         out.append(f'<div class="q"><p class="qh">{title}</p><p>{body}</p></div>')

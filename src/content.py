@@ -462,6 +462,76 @@ BUILT_DISCIPLINE = {
     ),
 }
 
+# The design's original author reviewed the published page and answered the four questions.
+# Two of the answers were good enough to change the system the same day; one refuted a claim
+# made on this page. Recorded here because an open notebook that only logs its own wins isn't one.
+REVIEW = {
+    "lede": (
+        "The page was sent back to the author of the design it critiques. The reply engaged with "
+        "the argument rather than defending the original, and three of its points were acted on "
+        "within hours. One of them refuted a claim made above."
+    ),
+    "refuted": {
+        "title": "Refuted: 'there is no replayable demand-side source'",
+        "body": (
+            "The objection above said demand-side data mostly lacks replayable history, so the "
+            "part you most want to validate is the part you cannot. That was too strong. The "
+            "archive is not absent — it is <em>fragmented by market</em>, and each fragment is "
+            "real: developer demand in question-and-answer site data dumps published since 2009; "
+            "governmental demand in federal solicitations and awards, where a solicitation is "
+            "expressed intent and an award is proof somebody paid; labour demand in archived "
+            "job-openings releases, whose *archived* form preserves what was published at the "
+            "time rather than today's revisions; and enterprise demand in purchase commitments "
+            "and capital spending inside filings."
+        ),
+        "tail": (
+            "The consequence is a design change, not just a correction: what's needed is "
+            "domain-specific demand adapters rather than one general demand collector. One "
+            "caveat the reply didn't carry — the question-and-answer dumps were moved behind "
+            "authentication by their publisher in 2024 and community reuploads were discouraged, "
+            "so that source survives on volunteer effort and should be treated as fragile."
+        ),
+    },
+    "adopted": [
+        ("An exploration lane",
+         "Ten to twenty percent of each digest should be sampled from candidates just below the "
+         "cut. Without it the output only ever contains what the ranking already liked, so any "
+         "signal drawn from which cards get acted on is conditioned on the ranking's own "
+         "preferences — learning from that could only ever confirm it. Implemented the same day, "
+         "and deterministically rather than randomly, because randomness would silently destroy "
+         "the replay guarantee the ledger is built around."),
+        ("Log every surfaced candidate, not only the ones acted on",
+         "This was stated as a principle in the original evaluation and turned out never to have "
+         "been built: cards were rendered, emailed, and gone. There was nothing for a ninety-day "
+         "review to read. Now written to an append-only table before the email is attempted, so a "
+         "failed send cannot lose the week's record."),
+        ("Say when a human's guess decided a rank",
+         "The suggestion was a percentage split between measured evidence and configured priors. "
+         "Implemented differently: a tuple sort is lexicographic, so the first term decides unless "
+         "it ties and a percentage would be fiction. What is answerable exactly is <em>which term "
+         "broke the tie against the next candidate</em>. Each card now names it, and shouts when "
+         "that term was a human estimate. It fired on the first real slate."),
+    ],
+    "pushback": {
+        "title": "Accepted pushback: the shutdown rule was too blunt",
+        "body": (
+            "The original rule was a single test at eight weeks. The objection: eight weeks is "
+            "enough to judge whether the <em>machine</em> works — whether collectors run, cards "
+            "are readable, evidence is bound, garbage is controlled — and nowhere near enough to "
+            "judge whether a detector built for rare events has found one. A system producing one "
+            "excellent opportunity every six months would have been killed at week eight."
+        ),
+        "tail": (
+            "Now staged: at eight weeks, shut down if the output is noisy, untrustworthy or "
+            "unreadable. At ninety days, shut down or narrow the domain if no prediction has "
+            "survived review. At a hundred and eighty days, shut down if no card has produced an "
+            "economically meaningful action — and <em>avoided mistakes count</em>. Demonstrating "
+            "that a seductive trend is already saturated is output the original rule couldn't "
+            "credit."
+        ),
+    },
+}
+
 BUILT_STILL_UNPROVEN = [
     ("No backtest has run",
      "The ledger was built so that replay is possible and safe — every read requires a cutoff, and "
