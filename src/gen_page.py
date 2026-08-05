@@ -285,6 +285,29 @@ def panel_open() -> str:
     return "".join(out)
 
 
+def panel_built() -> str:
+    out = ["<h2>What the build found</h2>", f"<p>{C.BUILT_LEDE}</p>"]
+
+    out.append("<h2>Where the argument held, or got stronger</h2>")
+    for title, body in C.BUILT_CONFIRMED:
+        out.append(read(title, body, "ok"))
+
+    out.append(f'<h2>{C.BUILT_BUGS["title"]}</h2>')
+    out.append(f'<p>{C.BUILT_BUGS["lede"]}</p>')
+    for title, body in C.BUILT_BUGS["items"]:
+        out.append(read(title, body, "warn"))
+
+    out.append(f'<div class="card"><h3>{C.BUILT_DISCIPLINE["title"]}</h3>'
+               f'<p>{C.BUILT_DISCIPLINE["body"]}</p>'
+               f'<p>{C.BUILT_DISCIPLINE["tail"]}</p></div>')
+
+    out.append("<h2>What still cannot be claimed</h2>")
+    for title, body in C.BUILT_STILL_UNPROVEN:
+        out.append(f'<div class="q"><p class="qh">{title}</p><p>{body}</p></div>')
+
+    return "".join(out)
+
+
 def panel_reply() -> str:
     out = ["<h2>For the design's author</h2>", f"<p>{C.REPLY_TO_CHATGPT['lede']}</p>"]
     for title, body in C.REPLY_TO_CHATGPT["points"]:
@@ -304,6 +327,7 @@ PANELS = {
     "breaks": panel_breaks,
     "design": panel_design,
     "open": panel_open,
+    "built": panel_built,
     "reply": panel_reply,
 }
 
@@ -339,9 +363,10 @@ def build() -> str:
 <nav class="tabs">{tabs}</nav>
 {panels}
 <footer>
-  <p>{C.PROJECT} is a design under evaluation, not a running system. Nothing here has been
-  validated against live data yet; every claim on this page is an argument, and the ones that turn
-  out wrong will stay up with corrections attached rather than being quietly edited away.</p>
+  <p>{C.PROJECT} is built and running, and has validated nothing. It collects real data and emits
+  cards weekly; no card has been acted on, no prediction scored, and no backtest run. The design
+  argument in the first five tabs is preserved exactly as it was written before any code existed —
+  corrections attach, they never replace, and the errors stay up in their original wording.</p>
   <p>Generated from <code>src/content.py</code>. No external requests, no trackers, no fonts.</p>
 </footer>
 </div>

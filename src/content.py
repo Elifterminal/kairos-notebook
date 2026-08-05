@@ -12,11 +12,11 @@ from __future__ import annotations
 PROJECT = "Kairos"
 DOC_TYPE = "Design notebook"
 SUBTITLE = (
-    "An open record of a proposed weak-signal detection system — one that looks for "
-    "opportunities before they go viral. The premise, the objections that nearly killed it, "
-    "and the narrower thing that survived."
+    "An open record of a weak-signal detection system — one that looks for opportunities before "
+    "they go viral. The premise, the objections that nearly killed it, the narrower thing that "
+    "survived, and what happened when it was actually built."
 )
-UPDATED = "2026-08-04"
+UPDATED = "2026-08-05"
 
 # Tabs are jobs, not chapters. Each one answers a question a reader actually arrives with.
 TABS = [
@@ -25,6 +25,7 @@ TABS = [
     ("breaks", "Where it breaks"),
     ("design", "What to build"),
     ("open", "Open questions"),
+    ("built", "What the build found"),
     ("reply", "For ChatGPT"),
 ]
 
@@ -374,3 +375,104 @@ REPLY_TO_CHATGPT = {
          "the design."),
     ],
 }
+
+
+# --- Added 2026-08-05, after the thing was built. -----------------------------
+#
+# The rest of this file is the argument as it stood before any code existed. It has NOT been
+# edited to match what happened — that's the point of an open notebook. Corrections attach; they
+# don't replace. What follows is the record of contact with real data.
+
+BUILT_LEDE = (
+    "The design above was written before a line of code existed. Then it was built: nine "
+    "collectors, five candidate builders, an append-only ledger, around three hundred tests, and "
+    "a digest that mails itself once a week. This section records what survived contact with real "
+    "data, what was strengthened, and what broke — including the places where the author of the "
+    "critique above committed the exact error the critique warns about."
+)
+
+BUILT_CONFIRMED = [
+    ("The archive asymmetry was worse than the objection claimed",
+     "The original objection was that demand-side sources mostly lack replayable history, so the "
+     "part you most want to validate is the part you cannot. Reality went further. The dominant "
+     "secondary-market platform has closed sold-price data to new developers entirely — not "
+     "merely unarchived but unavailable live, at any price, with the old endpoint decommissioned "
+     "and no paid tier that restores it. A free remote-jobs feed returns a salary field that is "
+     "zero on every single posting. So parts of the demand side aren't just unbacktestable; "
+     "they're unobservable. The objection understated the problem."),
+    ("The convergence requirement worked, by producing nothing",
+     "One class was deliberately gated on evidence from two unrelated origins, on the grounds "
+     "that a single source naming something is indistinguishable from one party manufacturing "
+     "its own trend. It sat silent through the entire build — candidates were being constructed "
+     "and every one was rejected. That silence was the gate doing its job, and it was the single "
+     "most tempting thing to weaken. It only started producing when a genuinely independent "
+     "second origin arrived: research preprints, which share no incentive and no timescale with "
+     "corporate disclosure."),
+    ("Costly-to-fake signals really are better",
+     "The best free signal turned out to be regulatory filings, because companies are legally "
+     "obliged to disclose material risks and a statement in a filing carries legal exposure. And "
+     "the useful number there is not mentions but *distinct filers* — ten filings from one "
+     "company is one company with a house style. Volume can be manufactured by a single verbose "
+     "party; independent identities cannot."),
+]
+
+BUILT_BUGS = {
+    "title": "Three real defects, all of the same kind",
+    "lede": (
+        "None of these announced themselves. Nothing crashed, no test failed at the time, and "
+        "every one produced confident output that was quietly wrong. That is the failure mode "
+        "worth designing against, because it is the one you ship."
+    ),
+    "items": [
+        ("A ranking sorted by a hand-typed constant",
+         "A ranker led with a number a human had typed into a configuration file — an estimate of "
+         "how long a problem had been open. Because the strongest candidates all tied on the "
+         "measured criterion, that guess became the effective sort key. The system was ranking by "
+         "its author's priors while appearing to rank by evidence. Found by a reader who couldn't "
+         "see the code, noticed a candidate that looked strong sitting below the cut, and said so."),
+        ("A threshold in the wrong units",
+         "An evidence floor required five observations. In most classes an observation is one "
+         "mention, so that means five mentions. In one class an observation was already an "
+         "aggregate summarising eighty-eight papers or twelve distinct companies — so the floor "
+         "silently meant 'require five separate sources', a bar nothing could ever clear. The "
+         "number was defensible; the unit was not."),
+        ("Two call sites drifting apart",
+         "The same list of builders existed in two commands. One got updated and the other "
+         "didn't, so two entire classes were present in one view of the system and silently "
+         "absent from the other. Neither errored."),
+    ],
+}
+
+BUILT_DISCIPLINE = {
+    "title": "The author committing the error the notebook warns about",
+    "body": (
+        "The central objection on this page is that you cannot learn the weights — that tuning "
+        "parameters until they produce the answer you wanted is overfitting with a scientific "
+        "vocabulary. During the build, a reader pointed at a candidate ranked just below the cut "
+        "and said it looked close."
+    ),
+    "tail": (
+        "What followed was a new weighting parameter, justified by a genuinely plausible argument "
+        "about one signal arriving earlier in the sequence than another. The argument may even be "
+        "correct. But it was only sought after someone pointed at a specific candidate, which "
+        "makes it motivated reasoning regardless of whether it is true — and it did not change "
+        "that candidate's rank anyway. It was reverted, and the reasoning left in place as a "
+        "comment marking where the temptation was. A parameter invented to reach a conclusion, "
+        "which then fails to reach it, has nothing at all going for it."
+    ),
+}
+
+BUILT_STILL_UNPROVEN = [
+    ("No backtest has run",
+     "The ledger was built so that replay is possible and safe — every read requires a cutoff, and "
+     "revised figures append rather than overwrite, so replaying to a past date shows what was "
+     "known then rather than today's corrections. None of that machinery has been exercised. "
+     "Until it is, no claim about whether the system works is supportable."),
+    ("Nothing has been acted on",
+     "It produces cards. No card has been acted on, and no prediction has been scored. The "
+     "prediction log exists as a field on every card and is empty."),
+    ("The central claim remains untested",
+     "The objection that the weights cannot be learned still stands, because nothing has been "
+     "learned. All thresholds are hand-set and crude, exactly as recommended. Whether that is "
+     "sufficient is the open question the next six months answer."),
+]
