@@ -312,6 +312,13 @@ def panel_built() -> str:
     out.append(f'<div class="card"><h3>{pb["title"]}</h3>'
                f'<p>{pb["body"]}</p><p>{pb["tail"]}</p></div>')
 
+    oc = C.OPERATOR_CONTACT
+    out.append("<h2>What contact with a real operator found</h2>")
+    out.append(f'<p>{oc["lede"]}</p>')
+    for title, body in oc["items"]:
+        out.append(read(title, body, "warn"))
+    out.append(f'<div class="read"><p>{oc["close"]}</p></div>')
+
     rg = C.RADAR_GATE
     out.append("<h2>It turned out to be two systems</h2>")
     out.append(f'<p>{rg["lede"]}</p>')
@@ -398,12 +405,13 @@ def build() -> str:
 <nav class="tabs">{tabs}</nav>
 {panels}
 <footer>
-  <p>{C.PROJECT} is built and running. Its operator-fit layer is already useful; its
-  weak-signal layer has validated nothing and will stay unvalidated until a prediction log has
-  accumulated and a replay has run. Those are two different claims and the page tries hard not to
-  let the first one flatter the second. The design argument in the first five tabs is preserved
-  exactly as written before any code existed — corrections attach, they never replace, and the
-  errors stay up in their original wording.</p>
+  <p>{C.PROJECT} is built, running weekly, and being read by the person it was built for — who has
+  found more real defects in it than design review did. Its operator-fit layer is earning its keep;
+  its weak-signal layer has validated nothing and stays unvalidated until a prediction log
+  accumulates and a replay runs. Those are two different claims and this page tries hard not to let
+  the first flatter the second. The design argument in the first five tabs is preserved exactly as
+  written before any code existed — corrections attach, they never replace, and the errors stay up
+  in their original wording.</p>
   <p>Generated from <code>src/content.py</code>. No external requests, no trackers, no fonts.</p>
 </footer>
 </div>

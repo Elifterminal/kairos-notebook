@@ -14,7 +14,8 @@ DOC_TYPE = "Design notebook"
 SUBTITLE = (
     "An open record of a weak-signal detection system — one that looks for opportunities before "
     "they go viral. The premise, the objections that nearly killed it, the narrower thing that "
-    "survived, and what happened when it was actually built."
+    "survived, what happened when it was built, and what a real operator found the moment he "
+    "started reading its output."
 )
 UPDATED = "2026-08-05"
 
@@ -642,6 +643,64 @@ RADAR_GATE = {
         "Current honest state: <strong>Gate is working.</strong> <strong>Radar is unproven and "
         "will stay unproven until a prediction log has accumulated and a replay has run.</strong> "
         "Neither statement was sayable while the two were treated as one thing."
+    ),
+}
+
+# What happened once a real person started reading the output. Every one of these was invisible
+# during design and obvious within minutes of him looking at a card — which is the argument for
+# shipping something readable early rather than perfecting the model first.
+OPERATOR_CONTACT = {
+    "lede": (
+        "The design above was argued in the abstract, then built, then handed to the person it was "
+        "built for. That third step found more real defects than the first two combined, and they "
+        "were of a kind no amount of review would have caught, because they were all cases of the "
+        "system being confidently wrong about him rather than wrong about the world."
+    ),
+    "items": [
+        ("A capture loop with no output is not a loop",
+         "Feedback was collected and stored and then used for nothing. He rejected three items and "
+         "the next digest handed one straight back. That is worse than never asking, because it "
+         "tells someone their answer went nowhere — and it is an easy state to ship, since the "
+         "capture side is the visible half and looks like progress on its own."),
+        ("Score against the incumbent, never against zero",
+         "Every option was being judged against an abstract cost of living, as though the "
+         "alternative to acting were destitution. It never is. The real alternative is whatever "
+         "the person is already doing, and in this case that included subsidised housing worth "
+         "more than the wage suggested. An option can look excellent against nothing and mediocre "
+         "against the actual status quo."),
+        ("A measured baseline beats an invented one, and the invented one was deciding everything",
+         "The system carried a single un-sourced constant — an assumed annual cost of living. It "
+         "was flagged twice as an assumption and left in place. When the operator supplied his real "
+         "numbers, the constant implied he was several hundred dollars underwater every month. He "
+         "wasn't. That number had been quietly deciding every verdict in the largest class. The fix "
+         "was not a better estimate; it was removing the estimate from the decisive path."),
+        ("Measure proximity as change, not as a penalty from zero",
+         "Distance to the things he cares about was modelled as a cost incurred by moving, which "
+         "made every relocation look like a loss. He was already far from all of them. Moving "
+         "toward one *buys hours back*. The same arithmetic, with the origin corrected, reverses "
+         "the sign on a whole category of options."),
+        ("Some constraints belong to the person, not to the opportunity",
+         "A near-miss lane was built to surface things blocked on exactly one missing piece, on the "
+         "theory that a partner could supply it. It promptly offered a physician post as 'one "
+         "partner away'. Nobody holds a medical licence on your behalf. Before offering to route "
+         "around a constraint, check which side of the transaction it's attached to."),
+        ("If the card can't explain what the thing is, it wastes the slot",
+         "Two well-scoring items were rejected with 'I don't understand what that means'. The "
+         "scoring was fine; the card assumed familiarity it hadn't earned. 'Go and research it' is "
+         "precisely the self-directed step that doesn't happen, so an unexplained item is not a "
+         "lead — it's homework."),
+        ("Check the data before building what was asked for",
+         "Asked to build a seniority filter, the first move was to look at what the source actually "
+         "returned. Two larger errors were sitting in a field block that had been ignored entirely: "
+         "a third of listings were legally closed to him, and forty per cent were remote while "
+         "every single one had been hard-coded as requiring relocation — working directly against "
+         "the one option that cost him nothing."),
+    ],
+    "close": (
+        "None of these were subtle once visible. All of them were invisible while the system had no "
+        "reader. The general lesson is not 'test more' — it is that a decision system built for one "
+        "person cannot be validated without that person, and every week it runs unread is a week of "
+        "confident output nobody has checked."
     ),
 }
 
