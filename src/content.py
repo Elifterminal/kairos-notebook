@@ -532,6 +532,59 @@ REVIEW = {
     },
 }
 
+# Two design findings from building the near-miss lane, both general enough to be worth writing
+# down: they're about what an opportunity system can honestly offer an operator, not about any
+# particular operator.
+ADJACENCY = {
+    "title": "The near-miss lane, and why \u201cfind a partner\u201d is not an answer",
+    "lede": (
+        "Filtering hard on operator fit buys enormous precision and costs the ability to notice "
+        "anything one step outside the operator's current shape. A separate, capped section for "
+        "near-misses recovers some of that \u2014 things blocked on exactly one missing thing. "
+        "Building it produced two corrections worth generalising."
+    ),
+    "items": [
+        ("\u201cFind a partner\u201d is a category, not an action",
+         "It has no defined first step, no deadline anyone else imposes, rejection built into the "
+         "process, and an unbounded timeline. For an operator whose binding constraint is "
+         "starting things, that is the worst possible shape of instruction \u2014 worse than "
+         "relocating, which at least comes with lease dates and booked trucks. And a partner who "
+         "shares the operator's existing constraints removes nothing. So these cards never say "
+         "\u201cfind a partner\u201d. They name the specific missing capability and its "
+         "magnitude, because the real question is whether this is someone you could plausibly "
+         "ask, and fourteen thousand and four hundred thousand are the same category of blocker "
+         "and completely different conversations."),
+        ("Some constraints are non-delegable, and the system had to be told",
+         "The first build cheerfully offered a physician post as \u201cone partner away\u201d. "
+         "It isn't. A partner can fund a venture or hold a licence <em>for a business</em>; they "
+         "cannot be qualified on your behalf so you can take a job. Employment is excluded from "
+         "the lane entirely. The general form: before offering to route around a constraint, "
+         "check whether that constraint is attached to the opportunity or to the person."),
+        ("An unsized blocker is not a near-miss",
+         "The first build filled the section with \u201cneeds capital, amount unknown\u201d. "
+         "That isn't an opportunity blocked on a funder; it's one nobody has costed. It conveys "
+         "nothing at a glance, which was the section's only purpose. Unknown magnitude is now a "
+         "reason to exclude rather than a value to display."),
+    ],
+}
+
+CONTAMINATION = {
+    "title": "Six fake rows in the evidence ledger",
+    "body": (
+        "An early test run wrote six synthetic records into the production ledger, because a "
+        "monkeypatch redirecting the database path silently didn't take effect. They sat there "
+        "generating plausible cards \u2014 with titles like \u201cOpens A Market\u201d \u2014 "
+        "for hours, indistinguishable in the output from real ones."
+    ),
+    "tail": (
+        "The cleanup was trivial. The lesson isn't: an evidence store whose whole value is that "
+        "its contents are real has no defence against test data except one that is enforced "
+        "rather than remembered. The suite is now pointed at a throwaway directory before any "
+        "module loads, and opening the real ledger during a test raises. Prevention, because "
+        "cleanup requires noticing, and nobody noticed."
+    ),
+}
+
 BUILT_STILL_UNPROVEN = [
     ("No backtest has run",
      "The ledger was built so that replay is possible and safe — every read requires a cutoff, and "

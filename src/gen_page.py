@@ -312,6 +312,16 @@ def panel_built() -> str:
     out.append(f'<div class="card"><h3>{pb["title"]}</h3>'
                f'<p>{pb["body"]}</p><p>{pb["tail"]}</p></div>')
 
+    a = C.ADJACENCY
+    out.append(f'<h2>{a["title"]}</h2>')
+    out.append(f'<p>{a["lede"]}</p>')
+    for title, body in a["items"]:
+        out.append(read(title, body, "warn"))
+
+    c = C.CONTAMINATION
+    out.append(f'<div class="card"><h3>{c["title"]} <span class="tag bad">caught late</span></h3>'
+               f'<p>{c["body"]}</p><p>{c["tail"]}</p></div>')
+
     out.append("<h2>What still cannot be claimed</h2>")
     for title, body in C.BUILT_STILL_UNPROVEN:
         out.append(f'<div class="q"><p class="qh">{title}</p><p>{body}</p></div>')
